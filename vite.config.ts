@@ -10,7 +10,6 @@ export default defineConfig({
 			targets: [
 				{
 					src: 'node_modules/onnxruntime-web/dist/*.jsep.*',
-
 					dest: 'wasm'
 				}
 			]
@@ -20,9 +19,16 @@ export default defineConfig({
 		APP_VERSION: JSON.stringify(process.env.npm_package_version),
 		APP_BUILD_HASH: JSON.stringify(process.env.APP_BUILD_HASH || 'dev-build')
 	},
+	// --- 修改开始 ---
 	build: {
-		sourcemap: true
+		sourcemap: true,
+		rollupOptions: {
+			external: [
+				'y-protocols/awareness'
+			]
+		}
 	},
+	// --- 修改结束 ---
 	worker: {
 		format: 'es'
 	},
